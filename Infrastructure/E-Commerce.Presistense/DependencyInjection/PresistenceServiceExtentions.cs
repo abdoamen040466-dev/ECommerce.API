@@ -1,4 +1,6 @@
-﻿namespace E_Commerce.Presistense.DependencyInjection;
+﻿using E_Commerce.Presistense.DbInitializers;
+
+namespace E_Commerce.Presistense.DependencyInjection;
 public static class PresistenceServiceExtentions
 {
     public static IServiceCollection AddPresistenceServices(this IServiceCollection service
@@ -10,6 +12,7 @@ public static class PresistenceServiceExtentions
 
             options.UseSqlServer(connection);
         });
+        service.AddScoped<IDbInitializer, DbInitializer>();
         return service;
     }
 }
