@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\Core\E-Commerc.ServiceAbstraction\E-Commerc.ServiceAbstraction.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
 </Project>
