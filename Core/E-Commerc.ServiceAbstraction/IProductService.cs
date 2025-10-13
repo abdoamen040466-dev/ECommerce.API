@@ -1,7 +1,7 @@
 ﻿using E_Commerce.Shared.DataTransferObject.Products;
 
 namespace E_Commerc.ServiceAbstraction;
-public interface IProductServices
+public interface IProductService
 {
     Task<ProductResponse?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
     Task<IEnumerable<ProductResponse>> GetProductsAsync(CancellationToken cancellationToken = default);

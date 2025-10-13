@@ -3,7 +3,7 @@ using E_Commerce.Shared.DataTransferObject.Products;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Presentation.API.Controllers;
-public class ProductsController(IProductServices service) : APIBaseController
+public class ProductsController(IProductService service) : APIBaseController
 {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProducts(CancellationToken cancellationToken = default)

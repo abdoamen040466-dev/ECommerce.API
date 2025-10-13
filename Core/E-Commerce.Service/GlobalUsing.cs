@@ -1,0 +1,9 @@
+﻿global using AutoMapper;
+global using E_Commerc.ServiceAbstraction;
+global using E_Commerce.Domain.Contracts;
+global using E_Commerce.Domain.Entities.Products;
+global using E_Commerce.Service.Services;
+global using E_Commerce.Shared.DataTransferObject.Products;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Reflection;
+global using Microsoft.Extensions.Configuration;
