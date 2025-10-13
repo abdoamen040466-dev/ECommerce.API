@@ -18,13 +18,13 @@ public class ProductsController(IProductService service) : APIBaseController
         var response = await service.GetByIdAsync(id, cancellationToken);
         return Ok(response);
     }
-
+    [HttpGet("Brands")]
     public async Task<ActionResult<IEnumerable<BrandResponse>>> GetBrands(CancellationToken cancellationToken = default)
     {
         var response = await service.GetBrandsAsync(cancellationToken);
         return Ok(response);
     }
-
+    [HttpGet("Types")]
     public async Task<ActionResult<IEnumerable<TypeResponse>>> GetTypes(CancellationToken cancellationToken = default)
     {
         var response = await service.GetTypesAsync(cancellationToken);

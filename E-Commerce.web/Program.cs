@@ -1,5 +1,6 @@
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Presistense.DependencyInjection;
+using E_Commerce.Service.DependencyInjection;
 
 namespace E_Commerce.web
 {
@@ -13,6 +14,7 @@ namespace E_Commerce.web
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddApplicationServices();
             builder.Services.AddPresistenceServices(builder.Configuration);
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -30,6 +32,8 @@ namespace E_Commerce.web
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
