@@ -1,5 +1,5 @@
 ﻿namespace E_Commerce.Presistense.Context;
-internal class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : DbContext(options)
 {
     public DbSet<Product> Products { get; set; }
