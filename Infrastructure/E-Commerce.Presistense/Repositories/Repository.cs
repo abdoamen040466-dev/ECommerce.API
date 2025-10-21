@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.Presistense.Repositories;
 public class Repository<TEntity, TKey>(ApplicationDbContext dbContext) : IRepository<TEntity, TKey>
@@ -22,6 +23,10 @@ public class Repository<TEntity, TKey>(ApplicationDbContext dbContext) : IReposi
     public async Task<TEntity?> GetByIdAsync(TKey id, CancellationToken cancellationToken = default)
     {
         return await _dbSet.FindAsync(id, cancellationToken);
+    }
+    public async Task<TEntity?> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    {
+        return await _dbSet.ApplySpecification(specification).FirstOrDefaultAsync(cancellationToken);
     }
 
     public void Remove(TEntity entity)
