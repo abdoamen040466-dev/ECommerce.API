@@ -6,9 +6,9 @@ namespace E_Commerce.Presentation.API.Controllers;
 public class ProductsController(IProductService service) : APIBaseController
 {
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProducts(CancellationToken cancellationToken = default)
+    public async Task<ActionResult<IEnumerable<ProductResponse>>> GetProducts([FromQuery] ProductQueryParameters parameters , CancellationToken cancellationToken = default)
     {
-        var response = await service.GetProductsAsync(cancellationToken);
+        var response = await service.GetProductsAsync(parameters, cancellationToken);
         return Ok(response);
     }
 
