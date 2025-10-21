@@ -1,6 +1,6 @@
 @ECommerce.web_HostAddress = https://localhost:7045
 
-Get {{ECommerce.web_HostAddress}}/api/Products?sort=5
+Get {{ECommerce.web_HostAddress}}/api/Products?PageSize=7&pageindex=3
 Accept: application/json
 ###
 Get {{ECommerce.web_HostAddress}}/api/Products/19

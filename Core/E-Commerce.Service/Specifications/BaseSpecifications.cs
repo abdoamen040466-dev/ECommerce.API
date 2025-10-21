@@ -17,6 +17,18 @@ internal abstract class BaseSpecifications<TEntity> : ISpecification<TEntity>
 
     public Expression<Func<TEntity, object>> OrderByDesc { get; private set; }
 
+    public int Skip { get; private set; }
+
+    public int Take { get; private set; }
+
+    public bool IsPaginated { get; private set; }
+
+    protected void ApplyPagination(int pageSize, int pageIndex)
+    {
+        IsPaginated = true;
+        Skip = (pageIndex - 1) * pageSize;
+        Take = pageSize;
+    }
     protected void AddInclude(Expression<Func<TEntity, object>> expression)
     {
         incudes.Add(expression);

@@ -1,5 +1,6 @@
 ﻿using E_Commerce.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace E_Commerce.Presistense.Repositories;
 public class Repository<TEntity, TKey>(ApplicationDbContext dbContext) : IRepository<TEntity, TKey>
@@ -38,5 +39,10 @@ public class Repository<TEntity, TKey>(ApplicationDbContext dbContext) : IReposi
     public void Update(TEntity entity)
     {
         _dbSet.Update(entity);
+    }
+
+    public async Task<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) 
+    {
+         return await _dbSet.ApplySpecification(specification).CountAsync();
     }
 }

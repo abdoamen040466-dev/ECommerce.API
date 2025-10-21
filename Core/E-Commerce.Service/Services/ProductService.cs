@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Service.Specifications;
+using E_Commerce.Shared.DataTransferObject;
 
 namespace E_Commerce.Service.Services;
 public class ProductService(IUnitOfWork unitOfWork, IMapper mapper) : IProductService
@@ -19,12 +20,17 @@ public class ProductService(IUnitOfWork unitOfWork, IMapper mapper) : IProductSe
 
     }
 
-    public async Task<IEnumerable<ProductResponse>> GetProductsAsync(ProductQueryParameters parameters, CancellationToken cancellationToken = default)
+    public async Task<PaginatedResult<ProductResponse>> GetProductsAsync(ProductQueryParameters parameters, CancellationToken cancellationToken = default)
     {
         var spec = new ProductWithBrandTypeSpecification(parameters);
-        var products = await unitOfWork.GetRepository<Product, int>()
+        var data = await unitOfWork.GetRepository<Product, int>()
             .GetAllAsyc(spec, cancellationToken);
-        return mapper.Map<IEnumerable<ProductResponse>>(products);
+
+        var totalCount = await unitOfWork.GetRepository<Product, int>()
+            .CountAsync(new ProductCountSpecification(parameters), cancellationToken);
+
+        var products = mapper.Map<IEnumerable<ProductResponse>>(data);
+        return new(parameters.PageIndex, products.Count(), totalCount, products);
     }
 
     public async Task<IEnumerable<TypeResponse>> GetTypesAsync(CancellationToken cancellationToken = default)

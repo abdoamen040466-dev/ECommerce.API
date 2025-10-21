@@ -11,4 +11,5 @@ public interface IRepository<TEntity, TKey>
     Task<TEntity?> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
     Task<IEnumerable<TEntity>> GetAllAsyc(CancellationToken cancellationToken = default);
     Task<IEnumerable<TEntity>> GetAllAsyc(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
+    Task<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
 }

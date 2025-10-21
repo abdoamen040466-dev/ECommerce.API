@@ -8,6 +8,7 @@ internal class ProductWithBrandTypeSpecification : BaseSpecifications<Product>
     {
         AddInclude(p => p.ProductBrand);
         AddInclude(p => p.ProductType);
+        ApplyPagination(parameters.PageSize, parameters.PageIndex);
         Sort(parameters);
     }
 
