@@ -7,6 +7,6 @@ public class Product : Entity<int>
     public decimal price { get; set; }
     public ProductBrand ProductBrand { get; set; } = default!;
     public int BrandId { get; set; }
-    public ProductBrand ProductType { get; set; } = default!;
+    public ProductType ProductType { get; set; } = default!;
     public int TypeId { get; set; }
 }

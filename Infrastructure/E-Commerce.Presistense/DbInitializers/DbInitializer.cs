@@ -27,7 +27,11 @@ internal class DbInitializer(ApplicationDbContext dbContext) : IDbInitializer
         if (!dbContext.ProductTypes.Any())
         {
             var typesData = await File.ReadAllTextAsync(@"..\Infrastructure\E-Commerce.Presistense\Context\DataSeed\types.json");
-            var types = JsonSerializer.Deserialize<List<ProductType>>(typesData);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            var types = JsonSerializer.Deserialize<List<ProductType>>(typesData, options);
             if (types != null && types.Any())
             {
                 dbContext.ProductTypes.AddRange(types);
@@ -38,7 +42,11 @@ internal class DbInitializer(ApplicationDbContext dbContext) : IDbInitializer
         if (!dbContext.Products.Any())
         {
             var ProductsData = await File.ReadAllTextAsync(@"..\Infrastructure\E-Commerce.Presistense\Context\DataSeed\products.json");
-            var Products = JsonSerializer.Deserialize<List<Product>>(ProductsData);
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            var Products = JsonSerializer.Deserialize<List<Product>>(ProductsData, options);
             if (Products != null && Products.Any())
             {
                 dbContext.Products.AddRange(Products);

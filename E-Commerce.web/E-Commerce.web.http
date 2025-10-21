@@ -1,6 +1,14 @@
-@E_Commerce.web_HostAddress = http://localhost:5013
+@ECommerce.web_HostAddress = https://localhost:7045
 
-GET {{E_Commerce.web_HostAddress}}/weatherforecast/
+Get {{ECommerce.web_HostAddress}}/api/Products
 Accept: application/json
-
+###
+Get {{ECommerce.web_HostAddress}}/api/Products/10
+Accept: application/json
+###
+Get {{ECommerce.web_HostAddress}}/api/Products/Brands
+Accept: application/json
+###
+Get {{ECommerce.web_HostAddress}}/api/Products/Types
+Accept: application/json
 ###

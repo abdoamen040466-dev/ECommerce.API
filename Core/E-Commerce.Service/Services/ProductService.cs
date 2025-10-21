@@ -1,4 +1,6 @@
-﻿namespace E_Commerce.Service.Services;
+﻿using E_Commerce.Service.Specifications;
+
+namespace E_Commerce.Service.Services;
 public class ProductService(IUnitOfWork unitOfWork, IMapper mapper) : IProductService
 {
     public async Task<IEnumerable<BrandResponse>> GetBrandsAsync(CancellationToken cancellationToken = default)
@@ -18,8 +20,9 @@ public class ProductService(IUnitOfWork unitOfWork, IMapper mapper) : IProductSe
 
     public async Task<IEnumerable<ProductResponse>> GetProductsAsync(CancellationToken cancellationToken = default)
     {
+        var spec = new ProductWithBrandTypeSpecification();
         var products = await unitOfWork.GetRepository<Product, int>()
-            .GetAllAsyc(cancellationToken);
+            .GetAllAsyc(spec, cancellationToken);
         return mapper.Map<IEnumerable<ProductResponse>>(products);
     }
 
