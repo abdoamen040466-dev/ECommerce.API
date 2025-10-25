@@ -6,7 +6,7 @@ public static class PresistenceServiceExtentions
     public static IServiceCollection AddPresistenceServices(this IServiceCollection service
         , IConfiguration configuration)
     {
-
+        service.AddScoped<IBasketRepository, BasketRepository>();
         service.AddSingleton<IConnectionMultiplexer>(cfg =>
         {
             return ConnectionMultiplexer.Connect(configuration
