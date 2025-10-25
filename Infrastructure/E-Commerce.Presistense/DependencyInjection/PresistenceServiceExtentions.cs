@@ -1,4 +1,6 @@
-﻿using StackExchange.Redis;
+﻿using E_Commerc.ServiceAbstraction;
+using E_Commerce.Presistense.Service;
+using StackExchange.Redis;
 
 namespace E_Commerce.Presistense.DependencyInjection;
 public static class PresistenceServiceExtentions
@@ -6,6 +8,7 @@ public static class PresistenceServiceExtentions
     public static IServiceCollection AddPresistenceServices(this IServiceCollection service
         , IConfiguration configuration)
     {
+        service.AddScoped<ICashService, CashService>();
         service.AddScoped<IBasketRepository, BasketRepository>();
         service.AddSingleton<IConnectionMultiplexer>(cfg =>
         {
