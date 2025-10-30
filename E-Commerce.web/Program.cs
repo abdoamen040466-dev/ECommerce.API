@@ -1,6 +1,7 @@
 using E_Commerce.Domain.Contracts;
 using E_Commerce.Presistense.DependencyInjection;
 using E_Commerce.Service.DependencyInjection;
+using E_Commerce.web.Handler;
 
 namespace E_Commerce.web
 {
@@ -18,6 +19,10 @@ namespace E_Commerce.web
             builder.Services.AddPresistenceServices(builder.Configuration);
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
+            builder.Services.AddProblemDetails();
+
+
 
             var app = builder.Build();
 
@@ -32,7 +37,7 @@ namespace E_Commerce.web
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseExceptionHandler();
             app.UseStaticFiles();
 
             app.UseHttpsRedirection();
