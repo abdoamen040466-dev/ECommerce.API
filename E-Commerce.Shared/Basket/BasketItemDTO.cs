@@ -1,7 +1,10 @@
-﻿namespace E_Commerce.Shared.Basket;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace E_Commerce.Shared.Basket;
 public class BasketItemDTO
 {
 #nullable disable
+    [Required]
     public string Id { get; set; }
     public string Name { get; set; }
     public string PictureUrl { get; set; }
