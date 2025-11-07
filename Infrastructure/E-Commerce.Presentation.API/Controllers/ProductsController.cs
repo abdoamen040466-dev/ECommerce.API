@@ -19,7 +19,7 @@ public class ProductsController(IProductService service) : APIBaseController
     public async Task<ActionResult<ProductResponse>> Get(int id, CancellationToken cancellationToken = default)
     {
         var response = await service.GetByIdAsync(id, cancellationToken);
-        return Ok(response);
+        return HandleResult(response);
     }
     [HttpGet("Brands")]
     public async Task<ActionResult<IEnumerable<BrandResponse>>> GetBrands(CancellationToken cancellationToken = default)

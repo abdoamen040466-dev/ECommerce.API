@@ -13,7 +13,8 @@ public class BasketsController(IBasketService basketService) : APIBaseController
     [HttpGet]
     public async Task<ActionResult<CustomerBasketDTO>> Get(string id)
     {
-        return Ok(await basketService.GetByIdAsync(id));
+        var basket = await basketService.GetByIdAsync(id);
+        return HandleResult(basket);
     }
     // Post baseUrl/api/Baskets?id=value
     [HttpDelete]
