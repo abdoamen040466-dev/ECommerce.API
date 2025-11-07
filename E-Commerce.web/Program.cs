@@ -51,6 +51,7 @@ namespace E_Commerce.web
             var scope = app.Services.CreateScope();
             var initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
             await initializer.InitializeAsync();
+            await initializer.InitializeAuthDbAsync();
 
 
             // Configure the HTTP request pipeline.

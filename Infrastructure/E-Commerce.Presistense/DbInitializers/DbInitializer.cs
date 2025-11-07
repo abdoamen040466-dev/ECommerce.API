@@ -1,5 +1,15 @@
-﻿namespace E_Commerce.Presistense.DbInitializers;
-internal class DbInitializer(StoreDbContext dbContext) : IDbInitializer
+﻿using E_Commerce.Domain.Entities.Auth;
+using E_Commerce.Presistense.AuthContext;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
+
+namespace E_Commerce.Presistense.DbInitializers;
+internal class DbInitializer(StoreDbContext dbContext,
+    AuthDbContext authDbContext,
+    RoleManager<IdentityRole> roleManager,
+    UserManager<ApplicationUser> userManager,
+    ILogger<DbInitializer> logger)
+    : IDbInitializer
 {
     public async Task InitializeAsync()
     {
@@ -56,4 +66,38 @@ internal class DbInitializer(StoreDbContext dbContext) : IDbInitializer
         }
 
     }
+
+    public async Task InitializeAuthDbAsync()
+    {
+        await authDbContext.Database.MigrateAsync();
+
+        if (!roleManager.Roles.Any())
+        {
+            await roleManager.CreateAsync(new IdentityRole("Admin"));
+            await roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+        }
+        if (!userManager.Users.Any())
+        {
+            var SuperAdminUser = new ApplicationUser
+            {
+                DisplayName = "Super Admin",
+                Email = "SuperAdmin@gmail.com",
+                UserName = "SuperAdmin",
+                PhoneNumber = "01000000000",
+            };
+            var adminUser = new ApplicationUser
+            {
+                DisplayName = "Admin",
+                Email = "Admin@gmail.com",
+                UserName = "Admin",
+                PhoneNumber = "01123456789",
+            };
+            await userManager.CreateAsync(SuperAdminUser, "Passw0rd");
+            await userManager.CreateAsync(adminUser, "Passw0rd");
+
+            await userManager.AddToRoleAsync(SuperAdminUser, "SuperAdmin");
+            await userManager.AddToRoleAsync(adminUser, "Admin");
+        }
+    }
+
 }
