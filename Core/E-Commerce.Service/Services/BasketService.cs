@@ -1,4 +1,5 @@
-﻿using E_Commerce.Domain.Entities.Basket;
+﻿using E_Commerc.ServiceAbstraction.Common;
+using E_Commerce.Domain.Entities.Basket;
 using E_Commerce.Service.Exceptions;
 using E_Commerce.Shared.Basket;
 
@@ -17,10 +18,13 @@ public class BasketService(IBasketRepository basketRepository, IMapper mapper) :
         await basketRepository.DeleteAsync(id);
     }
 
-    public async Task<CustomerBasketDTO> GetByIdAsync(string id)
+    public async Task<Result<CustomerBasketDTO>> GetByIdAsync(string id)
     {
-        var basket = await basketRepository.GetAsync(id) ??
-            throw new BasketNotFoundException(id);
+        var basket = await basketRepository.GetAsync(id);
+
+        if (basket == null)
+            return Error.NotFound();
+
         return mapper.Map<CustomerBasketDTO>(basket);
     }
 }

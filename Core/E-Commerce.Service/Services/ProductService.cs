@@ -1,4 +1,5 @@
-﻿using E_Commerce.Service.Exceptions;
+﻿using E_Commerc.ServiceAbstraction.Common;
+using E_Commerce.Service.Exceptions;
 using E_Commerce.Service.Specifications;
 using E_Commerce.Shared.DataTransferObject;
 
@@ -12,12 +13,15 @@ public class ProductService(IUnitOfWork unitOfWork, IMapper mapper) : IProductSe
         return mapper.Map<IEnumerable<BrandResponse>>(brands);
     }
 
-    public async Task<ProductResponse?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
+    public async Task<Result<ProductResponse>> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
         var spec = new ProductWithBrandTypeSpecification(id);
         var product = await unitOfWork.GetRepository<Product, int>()
-            .GetAsync(spec, cancellationToken) ??
-            throw new ProductNotFoundException(id);
+            .GetAsync(spec, cancellationToken);
+
+        if (product == null)
+            return Error.NotFound();
+
         return mapper.Map<ProductResponse>(product);
 
     }
