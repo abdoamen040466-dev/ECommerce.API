@@ -3,7 +3,10 @@ using E_Commerce.Infrastructure.Service;
 using E_Commerce.Presistense.DependencyInjection;
 using E_Commerce.Service.DependencyInjection;
 using E_Commerce.web.Handler;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace E_Commerce.web
 {
@@ -46,6 +49,30 @@ namespace E_Commerce.web
                 };
             });
 
+            builder.Services.AddAuthentication(options =>
+            {
+                // Token => Bearer Sheme validation this token
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                // invalid token =>  401 unAutherized
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    var jwt = builder.Configuration.GetSection(JWTOptions.SectionName)
+                    .Get<JWTOptions>();
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateLifetime = true,
+                        ValidateAudience = true,
+                        ValidateIssuer = true,
+                        ValidateIssuerSigningKey = true,
+
+                        ValidIssuer = jwt.Issuer,
+                        ValidAudience = jwt.Audience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.key))
+
+                    };
+                });
 
 
             var app = builder.Build();
@@ -67,6 +94,7 @@ namespace E_Commerce.web
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

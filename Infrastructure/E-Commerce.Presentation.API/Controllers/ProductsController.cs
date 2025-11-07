@@ -2,6 +2,7 @@
 using E_Commerce.Presentation.API.Attributes;
 using E_Commerce.Shared.DataTransferObject;
 using E_Commerce.Shared.DataTransferObject.Products;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Presentation.API.Controllers;
@@ -14,7 +15,7 @@ public class ProductsController(IProductService service) : APIBaseController
         var response = await service.GetProductsAsync(parameters, cancellationToken);
         return Ok(response);
     }
-
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<ActionResult<ProductResponse>> Get(int id, CancellationToken cancellationToken = default)
     {
