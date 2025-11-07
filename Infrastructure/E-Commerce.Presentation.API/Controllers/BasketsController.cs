@@ -1,5 +1,5 @@
 ﻿using E_Commerc.ServiceAbstraction;
-using E_Commerce.Shared.Basket;
+using E_Commerce.Shared.DataTransferObject.Basket;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Presentation.API.Controllers;

@@ -1,7 +1,7 @@
 ﻿using E_Commerc.ServiceAbstraction.Common;
 using E_Commerce.Domain.Entities.Basket;
 using E_Commerce.Service.Exceptions;
-using E_Commerce.Shared.Basket;
+using E_Commerce.Shared.DataTransferObject.Basket;
 
 namespace E_Commerce.Service.Services;
 public class BasketService(IBasketRepository basketRepository, IMapper mapper) : IBasketService

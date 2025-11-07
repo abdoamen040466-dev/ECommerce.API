@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace E_Commerce.Shared.Basket;
+namespace E_Commerce.Shared.DataTransferObject.Basket;
 public class BasketItemDTO
 {
 #nullable disable

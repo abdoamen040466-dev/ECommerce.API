@@ -1,5 +1,5 @@
 ﻿using E_Commerce.Domain.Entities.Basket;
-using E_Commerce.Shared.Basket;
+using E_Commerce.Shared.DataTransferObject.Basket;
 
 namespace E_Commerce.Service.MappingProfiles;
 internal class BasketProfile : Profile
