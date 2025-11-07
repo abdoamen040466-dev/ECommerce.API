@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace E_Commerce.Service.Services;
 internal class AuthService(UserManager<ApplicationUser> userManager,
-    ITokenService tokenService)
+    ITokenService tokenService) : IAuthService
 {
     public async Task<Result<UserResponse>> LoginAsync(LoginResponse Request)
     {
