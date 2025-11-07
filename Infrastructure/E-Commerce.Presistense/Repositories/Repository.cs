@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace E_Commerce.Presistense.Repositories;
-public class Repository<TEntity, TKey>(ApplicationDbContext dbContext) : IRepository<TEntity, TKey>
+public class Repository<TEntity, TKey>(StoreDbContext dbContext) : IRepository<TEntity, TKey>
     where TEntity : Entity<TKey>
 {
     private readonly DbSet<TEntity> _dbSet = dbContext.Set<TEntity>();

@@ -1,5 +1,5 @@
 ﻿namespace E_Commerce.Presistense.DbInitializers;
-internal class DbInitializer(ApplicationDbContext dbContext) : IDbInitializer
+internal class DbInitializer(StoreDbContext dbContext) : IDbInitializer
 {
     public async Task InitializeAsync()
     {
