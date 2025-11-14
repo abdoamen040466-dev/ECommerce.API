@@ -11,7 +11,7 @@ internal static class SpecificationEvaluator
 
 
 
-        query = specification.incudes
+        query = specification.includes
             .Aggregate(query, (query, include) => query.Include(include));
 
         if (specification.OrderBy is not null)

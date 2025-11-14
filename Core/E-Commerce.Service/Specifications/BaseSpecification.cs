@@ -9,7 +9,7 @@ internal abstract class BaseSpecification<TEntity> : ISpecification<TEntity>
         Criteria = criteria;
     }
 
-    public ICollection<Expression<Func<TEntity, object>>> incudes { get; private set; } = [];
+    public ICollection<Expression<Func<TEntity, object>>> includes { get; private set; } = [];
 
     public Expression<Func<TEntity, bool>> Criteria { get; private set; }
 
@@ -31,7 +31,7 @@ internal abstract class BaseSpecification<TEntity> : ISpecification<TEntity>
     }
     protected void AddInclude(Expression<Func<TEntity, object>> expression)
     {
-        incudes.Add(expression);
+        includes.Add(expression);
     }
 
     protected void AddOrderBy(Expression<Func<TEntity, object>> expression)

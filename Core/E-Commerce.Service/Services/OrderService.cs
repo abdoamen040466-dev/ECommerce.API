@@ -23,7 +23,7 @@ public class OrderService(IUnitOfWork unitOfWork,
 
         var productRepo = unitOfWork.GetRepository<Product>();
         var ids = basket.Items.Select(i => i.Id).ToList();
-        var products = (await productRepo.GetAllAsyc(new GetProductByIdsSpecification(ids)))
+        var products = (await productRepo.GetAllAsync(new GetProductByIdsSpecification(ids)))
             .ToDictionary(p => p.Id);
 
         var orderItems = new List<OrderItem>();
@@ -71,4 +71,41 @@ public class OrderService(IUnitOfWork unitOfWork,
         await unitOfWork.SaveChangesAsync();
         return mapper.Map<OrderResponse>(order);
     }
+
+    public async Task<Result<List<OrderResponse>>> GetUserOrderAsync(string email)
+    {
+        var orderRepo = unitOfWork.GetRepository<Order, Guid>();
+        var orders = (await orderRepo.GetAllAsync(new GetOrderByEmail(email)))
+            .ToList();
+
+        if (!orders.Any())
+            return Error.NotFound("Orders Not Found",
+                $"customer with email {email} doesn't have any orders");
+
+        var response = mapper.Map<List<OrderResponse>>(orders);
+
+        return response;
+    }
+
+    public async Task<Result<OrderResponse>> GetOrderByIdAsync(Guid id, string email)
+    {
+        var orderRepo = unitOfWork.GetRepository<Order, Guid>();
+        var order = await orderRepo.GetAsync(new GetOrderByIdAndEmailSpecification(id, email));
+
+        if (order == null)
+            return Error.NotFound("Order Not Found",
+                $"Order with id {id} was not found");
+        return mapper.Map<OrderResponse>(order);
+    }
+    public async Task<Result<List<DeliveryMethodDTO>>> GetDeliveryMethodsAsync()
+    {
+        var methods = await unitOfWork.GetRepository<DeliveryMethod>()
+            .GetAllAsync();
+
+        if (methods.Any())
+            return Error.NotFound("Delivery Methods Not Found", "Delivery Methods Not Found");
+
+        return mapper.Map<List<DeliveryMethodDTO>>(methods);
+    }
+
 }

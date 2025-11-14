@@ -9,7 +9,7 @@ public class ProductService(IUnitOfWork unitOfWork, IMapper mapper) : IProductSe
     public async Task<IEnumerable<BrandResponse>> GetBrandsAsync(CancellationToken cancellationToken = default)
     {
         var brands = await unitOfWork.GetRepository<ProductBrand, int>()
-            .GetAllAsyc(cancellationToken);
+            .GetAllAsync(cancellationToken);
         return mapper.Map<IEnumerable<BrandResponse>>(brands);
     }
 
@@ -30,7 +30,7 @@ public class ProductService(IUnitOfWork unitOfWork, IMapper mapper) : IProductSe
     {
         var spec = new ProductWithBrandTypeSpecification(parameters);
         var data = await unitOfWork.GetRepository<Product, int>()
-            .GetAllAsyc(spec, cancellationToken);
+            .GetAllAsync(spec, cancellationToken);
 
         var totalCount = await unitOfWork.GetRepository<Product, int>()
             .CountAsync(new ProductCountSpecification(parameters), cancellationToken);
@@ -42,7 +42,7 @@ public class ProductService(IUnitOfWork unitOfWork, IMapper mapper) : IProductSe
     public async Task<IEnumerable<TypeResponse>> GetTypesAsync(CancellationToken cancellationToken = default)
     {
         var types = await unitOfWork.GetRepository<ProductType, int>()
-            .GetAllAsyc(cancellationToken);
+            .GetAllAsync(cancellationToken);
         return mapper.Map<IEnumerable<TypeResponse>>(types);
     }
 }

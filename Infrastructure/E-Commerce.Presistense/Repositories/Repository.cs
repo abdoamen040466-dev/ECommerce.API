@@ -1,8 +1,4 @@
-﻿using E_Commerce.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-
-namespace E_Commerce.Presistense.Repositories;
+﻿namespace E_Commerce.Presistense.Repositories;
 public class Repository<TEntity, TKey>(StoreDbContext dbContext) : IRepository<TEntity, TKey>
     where TEntity : Entity<TKey>
 {
@@ -12,11 +8,11 @@ public class Repository<TEntity, TKey>(StoreDbContext dbContext) : IRepository<T
         _dbSet.Add(entity);
     }
 
-    public async Task<IEnumerable<TEntity>> GetAllAsyc(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
     {
         return await _dbSet.ToListAsync(cancellationToken);
     }
-    public async Task<IEnumerable<TEntity>> GetAllAsyc(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
     {
         return await _dbSet.ApplySpecification(specification).ToListAsync(cancellationToken);
     }
@@ -41,8 +37,8 @@ public class Repository<TEntity, TKey>(StoreDbContext dbContext) : IRepository<T
         _dbSet.Update(entity);
     }
 
-    public async Task<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default) 
+    public async Task<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default)
     {
-         return await _dbSet.ApplySpecification(specification).CountAsync();
+        return await _dbSet.ApplySpecification(specification).CountAsync();
     }
 }

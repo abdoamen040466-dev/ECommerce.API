@@ -9,7 +9,7 @@ public interface IRepository<TEntity, TKey>
     public void Update(TEntity entity);
     Task<TEntity?> GetByIdAsync(TKey id, CancellationToken cancellationToken = default);
     Task<TEntity?> GetAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
-    Task<IEnumerable<TEntity>> GetAllAsyc(CancellationToken cancellationToken = default);
-    Task<IEnumerable<TEntity>> GetAllAsyc(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
+    Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
     Task<int> CountAsync(ISpecification<TEntity> specification, CancellationToken cancellationToken = default);
 }
