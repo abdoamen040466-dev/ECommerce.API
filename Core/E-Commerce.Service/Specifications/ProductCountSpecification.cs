@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 namespace E_Commerce.Service.Specifications;
-internal class ProductCountSpecification : BaseSpecifications<Product>
+internal class ProductCountSpecification : BaseSpecification<Product>
 {
     public ProductCountSpecification(ProductQueryParameters parameters) : base(CreateCriteria(parameters))
     {

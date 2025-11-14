@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 
 namespace E_Commerce.Service.Specifications;
-internal class ProductWithBrandTypeSpecification : BaseSpecifications<Product>
+internal class ProductWithBrandTypeSpecification : BaseSpecification<Product>
 {
     public ProductWithBrandTypeSpecification(ProductQueryParameters parameters)
         : base(CreateCriteria(parameters))

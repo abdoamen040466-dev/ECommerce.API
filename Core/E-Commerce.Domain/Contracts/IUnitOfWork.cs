@@ -8,4 +8,6 @@ public interface IUnitOfWork
     IRepository<TEntity, TKey> GetRepository<TEntity, TKey>()
         where TEntity : Entity<TKey>;
 
+    IRepository<TEntity, int> GetRepository<TEntity>() where TEntity : Entity<int>;
+
 }

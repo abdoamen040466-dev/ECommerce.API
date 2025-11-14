@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
 
 namespace E_Commerce.Service.Specifications;
-internal abstract class BaseSpecifications<TEntity> : ISpecification<TEntity>
+internal abstract class BaseSpecification<TEntity> : ISpecification<TEntity>
     where TEntity : class
 {
-    protected BaseSpecifications(Expression<Func<TEntity, bool>> criteria)
+    protected BaseSpecification(Expression<Func<TEntity, bool>> criteria)
     {
         Criteria = criteria;
     }
