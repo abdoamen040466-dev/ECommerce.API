@@ -20,4 +20,10 @@ public class AuthController(IAuthService authService)
 
     }
 
+    [HttpGet("CheckEmail")]
+    public async Task<ActionResult<bool>> CheckEmail(string email)
+    {
+        return Ok(await authService.CheckEmail(email));
+    }
+
 }
