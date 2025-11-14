@@ -24,7 +24,10 @@ internal class OrderProfile : Profile
             .ForMember(d => d.Name,
             o => o.MapFrom(s => s.Product.Name))
             .ForMember(d => d.PictureUrl,
-            o => o.MapFrom<OrderPictureUrlResolver>()); 
+            o => o.MapFrom<OrderPictureUrlResolver>());
+
+        CreateMap<DeliveryMethod, DeliveryMethodDTO>();
+
     }
 
 }

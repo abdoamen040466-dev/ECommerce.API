@@ -40,7 +40,7 @@ public class OrderService(IUnitOfWork unitOfWork,
             }
             var orderItem = new OrderItem
             {
-                Price = product.price,
+                Price = item.Price,
                 Quantity = item.Quantity,
                 Product = new ProductInOrderItem
                 {
@@ -102,7 +102,7 @@ public class OrderService(IUnitOfWork unitOfWork,
         var methods = await unitOfWork.GetRepository<DeliveryMethod>()
             .GetAllAsync();
 
-        if (methods.Any())
+        if (!methods.Any())
             return Error.NotFound("Delivery Methods Not Found", "Delivery Methods Not Found");
 
         return mapper.Map<List<DeliveryMethodDTO>>(methods);
