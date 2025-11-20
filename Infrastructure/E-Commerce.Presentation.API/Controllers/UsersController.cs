@@ -1,11 +1,12 @@
 ﻿using E_Commerc.ServiceAbstraction;
 using E_Commerce.Shared.DataTransferObject.Auth;
 using E_Commerce.Shared.DataTransferObject.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-
 namespace E_Commerce.Presentation.API.Controllers;
-internal class UsersController(IUserService userService)
+[Authorize]
+public class UsersController(IUserService userService)
     : APIBaseController
 {
     [HttpGet]

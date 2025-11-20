@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace E_Commerce.Presentation.API.Controllers;
 [Authorize]
-public class OrderController(IOrderService orderService)
+public class OrdersController(IOrderService orderService)
     : APIBaseController
 {
     [HttpPost]
@@ -17,7 +17,7 @@ public class OrderController(IOrderService orderService)
         return HandleResult(result);
     }
     [HttpGet]
-    public async Task<ActionResult<List<OrderResponse>>> GetUserProduct()
+    public async Task<ActionResult<List<OrderResponse>>> GetUserOrder()
     {
         var email = User.FindFirstValue(ClaimTypes.Email);
         var result = await orderService.GetUserOrderAsync(email);
