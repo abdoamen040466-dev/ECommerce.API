@@ -46,3 +46,70 @@ E-Commerce
 ├── E-Commerce.Infrastructure
 ├── E-Commerce.Domain
 ├── E-Commerce.Presistence
+```
+
+---
+
+## API Endpoints
+
+### Authentication
+- Register User
+- Login User
+- Check Email Availability
+
+### Products
+- Get All Products
+- Get Product By Id
+- Get Product Brands
+- Get Product Types
+
+### Orders
+- Create Order
+- Get Orders
+- Get Order By Id
+- Delivery Methods
+
+### Basket
+- Create Basket
+- Get Basket
+- Delete Basket
+
+### Users
+- Get Current User
+- Get User Address
+- Update Address
+
+---
+
+## Authentication
+
+This API uses JWT Bearer Authentication.
+
+Example:
+
+```bash
+Bearer YOUR_TOKEN_HERE
+```
+
+---
+
+
+---
+
+## Future Improvements
+
+- Payment Gateway Integration
+- Admin Dashboard
+- Docker Support
+- Refresh Tokens
+- Unit Testing
+- CI/CD Pipeline
+
+---
+
+## Author
+
+### Abdallah Amin
+
+GitHub:
+https://github.com/abdoamen040466-dev
