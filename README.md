@@ -91,10 +91,7 @@ Example:
 Bearer YOUR_TOKEN_HERE
 ```
 
----
 
-
----
 
 ## Future Improvements
 
